@@ -28,9 +28,9 @@ public class ObjectScript : MonoBehaviour
 
     void setRandomColor()
     {
-        
         if (gameObject.GetComponent<SpriteRenderer>().color == Color.white && time > rand)
         {
+            rand = Random.Range(1f, 10f);
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
             time = 0;
         }
