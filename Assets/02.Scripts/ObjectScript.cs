@@ -17,7 +17,7 @@ public class ObjectScript : MonoBehaviour
         audioSource = gameObject.GetComponent<AudioSource>();
         rand = Random.Range(1f, 10f);
     }
-
+    
    
     void Update()
     {
