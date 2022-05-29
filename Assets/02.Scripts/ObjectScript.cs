@@ -9,7 +9,6 @@ public class ObjectScript : MonoBehaviour
     AudioSource audioSource;
     float time;
     float rand;
-    int score;
 
     void Start()
     {
@@ -51,7 +50,7 @@ public class ObjectScript : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<SpriteRenderer>().color == Color.red)
                 {
                     Debug.Log("red");
-                    score++;
+                    GameManager.instance.score++;
                     audioSource.Play();
                     hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 }
