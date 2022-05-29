@@ -4,57 +4,81 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour
 {
-    List<GameObject> objList = new List<GameObject>();
+    List<GameObject> objList1 = new List<GameObject>();
+    List<GameObject> objList2 = new List<GameObject>();
+    List<GameObject> objList3 = new List<GameObject>();
     public GameObject obj;
 
-    float time;
     int createIndex;
-    int waitTime;
 
     void Start()
     {
-        waitTime = 10;
         createIndex = 0;
 
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < 3; i++)
         {
-            objList.Add(obj);
+            objList1.Add(obj);
         }
-
+        for (int i = 0; i < 3; i++)
+        {
+            objList2.Add(obj);
+        }
+        for (int i = 0; i < 3; i++)
+        {
+            objList3.Add(obj);
+        }
+        // 게임이 시작할 때 2번째 줄에 오브젝트 추가, 추가된 오브젝트를 리스트에서 삭제
         for (int i = -3; i < 4; i += 3)
         {
-            Instantiate(objList[0], new Vector2(i, 0), Quaternion.identity);
-            objList.RemoveAt(0);
+            Instantiate(objList1[0], new Vector2(i, 0), Quaternion.identity);
+            objList1.RemoveAt(0);
         }
     }
 
     void Update()
     {
-        time += Time.deltaTime;
-        
-        if (time > waitTime)
+        // 점수가 10점과 21점일 때 각각 createIndex를 1, 2로 변경
+        if (GameManager.instance.score == 10 && createIndex == 0)
         {
-            switch (createIndex)
+            for (int i = -3; i < 4; i += 3)
             {
-                case 0:
-                    for (int i = -3; i < 4; i += 3)
-                    {
-                        Instantiate(objList[0], new Vector2(i, -3), Quaternion.identity);
-                        objList.RemoveAt(0);
-                    }
-                    createIndex++;
-                    time = 0;
-                    break;
-                case 1:
-                    for (int i = -3; i < 4; i += 3)
-                    {
-                        Instantiate(objList[0], new Vector2(i, 3), Quaternion.identity);
-                        objList.RemoveAt(0);
-                    }
-                    createIndex++;
-                    break;
+                Instantiate(objList2[0], new Vector2(i, -3), Quaternion.identity);
+                objList2.RemoveAt(0);
             }
-            
+            createIndex = 1;
         }
+        else if (GameManager.instance.score == 21 && createIndex == 1)
+        {
+            for (int i = -3; i < 4; i += 3)
+            {
+                Instantiate(objList3[0], new Vector2(i, 3), Quaternion.identity);
+                objList3.RemoveAt(0);
+            }
+            createIndex = 2;
+        }
+
+        /*
+        switch (createIndex)
+        {
+            // createIndex가 1이면 3번째 줄에 오브젝트 추가, 추가된 오브젝트를 리스트에서 삭제 후 createIndex를 0으로 변경
+            case 1:
+                for (int i = -3; i < 4; i += 3)
+                {
+                    Instantiate(objList2[0], new Vector2(i, -3), Quaternion.identity);
+                    objList2.RemoveAt(0);
+                }
+                createIndex = 0;
+                break;
+            // createIndex가 2이면 1번째 줄에 오브젝트 추가, 추가된 오브젝트를 리스트에서 삭제 후 createIndex를 0으로 변경
+            case 2:
+                for (int i = -3; i < 4; i += 3)
+                {
+                    Instantiate(objList3[0], new Vector2(i, 3), Quaternion.identity);
+                    objList3.RemoveAt(0);
+                }
+                createIndex = 0;
+                break;
+        }
+        */
     }
 }
