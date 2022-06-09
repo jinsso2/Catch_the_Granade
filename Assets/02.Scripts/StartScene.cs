@@ -8,6 +8,7 @@ public class StartScene : MonoBehaviour
     void Start()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
+        GameManager.instance.score = 0;
     }
 
     public void btnDown()
