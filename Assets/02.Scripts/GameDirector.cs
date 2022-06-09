@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameDirector : MonoBehaviour
 {
@@ -80,5 +81,10 @@ public class GameDirector : MonoBehaviour
                 break;
         }
         */
+        if(GameManager.instance.bomb <= 0)
+        {
+            GameManager.isClear = true;
+            SceneManager.LoadScene("ClearScene");
+        }
     }
 }

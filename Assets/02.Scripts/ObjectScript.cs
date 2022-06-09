@@ -36,6 +36,7 @@ public class ObjectScript : MonoBehaviour
         if (gameObject.GetComponent<SpriteRenderer>().color == Color.red && time > 0.7f)
         {
             SceneManager.LoadScene("Scene_2");
+            GameManager.isFail = true;
         }
     }
     private void HitScan()
@@ -51,6 +52,7 @@ public class ObjectScript : MonoBehaviour
                 {
                     Debug.Log("red");
                     GameManager.instance.score++;
+                    GameManager.instance.bomb--;
                     audioSource.Play();
                     hit.collider.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 }
